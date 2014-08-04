@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="shortcut icon" href="/images/favicon.png"> -->
     <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
-    <link rel="canonical" href="http://yourdomain.com/about/">
+    <link rel="canonical" href="http://musingsonmusic.com/about/">
 
     <!-- Custom CSS -->
 <!--    <link rel="stylesheet" href="/css/main.css"> -->
@@ -17,6 +17,8 @@
     <!-- SCSS, baby -->
     <link rel="stylesheet" href="/css/style.css">
     <script src="js/modernizr.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/default.js"></script>
 </head>
 
 
@@ -24,60 +26,90 @@
       <div id="wrap">
         <header class="site-header row clear">
 
-    <nav class="social-media-nav col col-3">
-      <a class="icon-twitter twitter left inline-block" href="https://twitter.com/z_anderle" target="_blank"></a>
-      <a class="icon-instagramm instagram left inline-block" href="https://instagram.com/zanderle" target="_blank"></a>
-      <a class="icon-rss rss-feed left inline-block" href="/feed.xml"></a>
+    <nav class="social-media-nav col col-3 tablet-col-4 mobile-no-padding mobile-no-margin">
+      <ul class="mobile-no-margin">
+        <li class="inline-block">
+          <a class="icon-twitter twitter mobile-no-margin" href="https://twitter.com/z_anderle" target="_blank"></a>
+        </li>
+        <li class="inline-block">
+          <a class="icon-instagramm instagram mobile-no-margin" href="https://instagram.com/zanderle" target="_blank"></a>
+        </li>
+        <li class="inline-block">
+          <a class="icon-rss rss-feed mobile-no-margin" href="/feed.xml"></a>
+        </li>
+      </ul>
     </nav>
-    <div class="logo-wrapper col col-6">
+    <div class="logo-wrapper col col-6 tablet-col-4">
       <a class="main-logo container block" href="/"></a>
     </div>
-    <div class="menu-wrapper col col-3">
-      <a class="icon-menu right inline-block"></a>
+    <div class="menu-wrapper col col-3 tablet-col-4">
+      <a class="icon-menu right inline-block higher" id="menu" href="#"></a>
     </div>
-
-    <nav class="site-nav">
-      <div class="trigger">
+    <nav class="site-nav right">
+      <ul class="no-padding no-margin">
+        <li class="inline-block">
+          <a class="page-link" href="#">Home</a>
+        </li>
         
-          <a class="page-link" href="/about/">About</a>
+            
+            
+            
         
-          
+            
+            
+          <li class="inline-block">
+            <a class="page-link" href="/about/">About</a>
+          </li>
+            
+            
         
-          
+            
         
-          <a class="page-link" href="/nekajdrugega/">Testing</a>
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-      </div>
+      </ul>
     </nav>
+
 
 
 </header>
+
 <div class="subheader text-center">
-<h4 class="white heading">Music can be a form of perfection - with nothing added or subtracted, flawless just the way it is.</h4>
+<h4 class="white heading inline-block">Music can be a form of perfection - with nothing added or subtracted, flawless just the way it is.</h4>
 </div>
 
 
-        <div class="content row clear container">
+        <div class="row clear container">
           <div class="post">
 
   <header class="post-header">
-    <h1>About</h1>
+    <h1 class="heading text-center">About</h1>
   </header>
 
   <article class="post-content">
-  <p>This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <a href="http://jekyllrb.com/">jekyllrb.com</a></p>
+  <p><img src="/img/zan.jpg" alt="Me" class="left circle col-3 breathe" />
+I’m a 23 year old student of computer science from Bled, Slovenia. I’m passionate about travels, photography and above all - music. I like different kinds of music and I’m always excited to hear something new to me, but what I love the most is jazz, blues, soul and generally older music. I got into jazz about 6 years and last year I started writing this blog. Make sure to also check my <a href="https://zanderle.tumblr.com">photography page</a></p>
 
-<p>You can find the source code for the Jekyll new theme at: <a href="https://github.com/jglovier/jekyll-new">github.com/jglovier/jekyll-new</a></p>
-
-<p>You can find the source code for Jekyll at <a href="https://github.com/jekyll/jekyll">github.com/jekyll/jekyll</a></p>
+<p>I believe music can be a form of perfection - with nothing added or subtracted, flawless just the way it is. With its excellence, music has an amazing ability to evoke emotions, feelings and thoughts we wouldn’t have otherwise. That ability reminds us we’re human and it’s one of the things that makes life worthwhile. And that is why I write my blog. I write it because I believe talking, thinking, reading and writing about music intensifies the experience of listening to music. On top of that, I’m always happy when someone introduces me to new music I like, so with my blog, I hope others will be able to discover new music they like too.
+I will write mostly about Jazz and Blues, but other stuff as well - why even bother categorizing music - what’s good, is good.</p>
 
   </article>
 
@@ -85,16 +117,22 @@
         </div>
       </div>
 
-    <footer class="site-footer">
-
-  <div class="wrap">
-
-    <h2 class="footer-heading">My Musings on Music</h2> content and design by Žan Anderle
-
-  </div>
-
+    <footer class="row clear text-center gray">
+    <a href="/" class="footer-heading inline-block gray">My Musings on Music</a> - content and design by Žan Anderle
 </footer>
 
 
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mymusingsonmusic'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
     </body>
 </html>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="shortcut icon" href="/images/favicon.png"> -->
     <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
-    <link rel="canonical" href="http://yourdomain.com/">
+    <link rel="canonical" href="http://musingsonmusic.com/">
 
     <!-- Custom CSS -->
 <!--    <link rel="stylesheet" href="/css/main.css"> -->
@@ -17,6 +17,8 @@
     <!-- SCSS, baby -->
     <link rel="stylesheet" href="/css/style.css">
     <script src="js/modernizr.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/default.js"></script>
 </head>
 
 
@@ -24,65 +26,97 @@
       <div id="wrap">
         <header class="site-header row clear">
 
-    <nav class="social-media-nav col col-3">
-      <a class="icon-twitter twitter left inline-block" href="https://twitter.com/z_anderle" target="_blank"></a>
-      <a class="icon-instagramm instagram left inline-block" href="https://instagram.com/zanderle" target="_blank"></a>
-      <a class="icon-rss rss-feed left inline-block" href="/feed.xml"></a>
+    <nav class="social-media-nav col col-3 tablet-col-4 mobile-no-padding mobile-no-margin">
+      <ul class="mobile-no-margin">
+        <li class="inline-block">
+          <a class="icon-twitter twitter mobile-no-margin" href="https://twitter.com/z_anderle" target="_blank"></a>
+        </li>
+        <li class="inline-block">
+          <a class="icon-instagramm instagram mobile-no-margin" href="https://instagram.com/zanderle" target="_blank"></a>
+        </li>
+        <li class="inline-block">
+          <a class="icon-rss rss-feed mobile-no-margin" href="/feed.xml"></a>
+        </li>
+      </ul>
     </nav>
-    <div class="logo-wrapper col col-6">
+    <div class="logo-wrapper col col-6 tablet-col-4">
       <a class="main-logo container block" href="/"></a>
     </div>
-    <div class="menu-wrapper col col-3">
-      <a class="icon-menu right inline-block"></a>
+    <div class="menu-wrapper col col-3 tablet-col-4">
+      <a class="icon-menu right inline-block higher" id="menu" href="#"></a>
     </div>
-
-    <nav class="site-nav">
-      <div class="trigger">
+    <nav class="site-nav right">
+      <ul class="no-padding no-margin">
+        <li class="inline-block">
+          <a class="page-link" href="#">Home</a>
+        </li>
         
-          <a class="page-link" href="/about/">About</a>
+            
+            
+            
         
-          
+            
+            
+          <li class="inline-block">
+            <a class="page-link" href="/about/">About</a>
+          </li>
+            
+            
         
-          
+            
         
-          <a class="page-link" href="/nekajdrugega/">Testing</a>
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-      </div>
+      </ul>
     </nav>
+
 
 
 </header>
+
 <div class="subheader text-center">
-<h4 class="white heading">Music can be a form of perfection - with nothing added or subtracted, flawless just the way it is.</h4>
+<h4 class="white heading inline-block">Music can be a form of perfection - with nothing added or subtracted, flawless just the way it is.</h4>
 </div>
 
 
-        <div class="content row clear container">
+        <div class="row clear container">
           <div class="home">
 
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/jazz/louis/armstrong/story/2014/07/02/How-I-got-into-jazz/">How I got into jazz</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
-    <p><img src="http://1.bp.blogspot.com/-xOBj9x28df0/U7RhzavFqjI/AAAAAAAABo4/srzLXZOH9uE/
+  <article class="content">
+    <h4 id="a-story-about-how-coincidences-can-lead-to-amazing-things">A story about how coincidences can lead to amazing things.</h4>
+
+<p><img src="http://1.bp.blogspot.com/-xOBj9x28df0/U7RhzavFqjI/AAAAAAAABo4/srzLXZOH9uE/
 s1600/63.jpg" alt="" /></p>
 
 <p>It has been too long. I haven’t written a post for over a year. I devoted all
@@ -173,10 +207,10 @@ artist, every song, every record, one thing became clearer and clearer. I
 found my passion.</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2014-07-02 19:48:27 UTC</span>
+    <span class="inline-block">2. July 2014</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/jazz/louis/armstrong/story/2014/07/02/How-I-got-into-jazz/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -188,18 +222,18 @@ found my passion.</p>
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/bobby/mcferrin/collaboration/concert/jazz/at/lincoln/center/wynton/marsalis/2014/06/15/Bobby-McFerrin-&-Wynton-Marsalis/">Bobby McFerrin & Wynton Marsalis</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://1.bp.blogspot.com/-D5qdlIIUh8Q/UP6Mt6uzd9I/AAAAAAAABRg/KvokTWlz8Ns/
 s1600/533796_10151133921932976_375791819_n.jpg" alt="" /></p>
 
@@ -290,10 +324,10 @@ JALC, the post? As I always, I encourage you to share your comments.  </p>
 <p>Until next time everyone.</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2014-06-15 18:42:08 UTC</span>
+    <span class="inline-block">15. June 2014</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/bobby/mcferrin/collaboration/concert/jazz/at/lincoln/center/wynton/marsalis/2014/06/15/Bobby-McFerrin-&-Wynton-Marsalis/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -305,18 +339,18 @@ JALC, the post? As I always, I encourage you to share your comments.  </p>
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/band/cajun/doo/wop/etno/folk/instrumental/music/rap/slovenian/2013/07/07/Salonski---Fauna/">Salonski - Fauna</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://f0.bcbits.com/img/a2753353365_2.jpg" alt="" /></p>
 
 <p>I’m finally writing about a band that’s not only still active but also
@@ -425,10 +459,10 @@ in them. I’m not sure though, we’ll see.</p>
 <p>Your comments are, as always, much appreciated. Until next time.</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2013-07-07 19:11:06 UTC</span>
+    <span class="inline-block">7. July 2013</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/band/cajun/doo/wop/etno/folk/instrumental/music/rap/slovenian/2013/07/07/Salonski---Fauna/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -440,18 +474,18 @@ in them. I’m not sure though, we’ll see.</p>
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/instrumental/music/jazz/miles/davis/2013/04/11/In-A-Silent-Way/">In A Silent Way</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://3.bp.blogspot.com/-zgioX-
 rhAYY/UWctQk0KOjI/AAAAAAAABTQ/pU4fCnTemww/s1600/cover_481121122010.jpg" alt="" /></p>
 
@@ -571,10 +605,10 @@ in the next few days.</p>
 much, just listen and let yourself feel the wonders of music.</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2013-04-11 21:38:44 UTC</span>
+    <span class="inline-block">11. April 2013</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/instrumental/music/jazz/miles/davis/2013/04/11/In-A-Silent-Way/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -586,18 +620,18 @@ much, just listen and let yourself feel the wonders of music.</p>
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/ben/harper/blues/collaboration/gospel/the/blind/boys/of/alabama/2013/04/01/There-Will-Be-a-Light/">There Will Be a Light</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://www.paul-altobelli.com/wp-content/uploads/2011/04/Ben-Harper-There-
 will-be-a-light.jpeg" alt="" />Two months ago I began making some decisions about my
 studies and consequently I was focusing on college and neglected my blog and
@@ -679,10 +713,10 @@ collaboration on this album is perfect?</p>
 about next time?</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2013-04-01 21:46:23 UTC</span>
+    <span class="inline-block">1. April 2013</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/ben/harper/blues/collaboration/gospel/the/blind/boys/of/alabama/2013/04/01/There-Will-Be-a-Light/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -692,7 +726,53 @@ about next time?</p>
 </div>
 
 
+
+
+<div class="pagination text-center row clear">
+  <div class="pagination-box inline-block">
+    
+      <span class="page-box inline-block inactive" disabled>&laquo; Prev</span>
+    
+
+    
+      
+        <span class="page-box inline-block active">1</span>
+      
+    
+      
+        <a class="page-box inline-block" href="/page2">2</a>
+      
+    
+      
+        <a class="page-box inline-block" href="/page3">3</a>
+      
+    
+      
+        <a class="page-box inline-block" href="/page4">4</a>
+      
+    
+      
+        <a class="page-box inline-block" href="/page5">5</a>
+      
+    
+
+    
+      <a class="page-box inline-block" href="/page2">Next &raquo;</a>
+    
+  </div>
 </div>
+
+
+</div>
+
+
+        </div>
+      </div>
+
+    <footer class="row clear text-center gray">
+    <a href="/" class="footer-heading inline-block gray">My Musings on Music</a> - content and design by Žan Anderle
+</footer>
+
 
     <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -706,21 +786,5 @@ about next time?</p>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
     </script>
-
-
-        </div>
-      </div>
-
-    <footer class="site-footer">
-
-  <div class="wrap">
-
-    <h2 class="footer-heading">My Musings on Music</h2> content and design by Žan Anderle
-
-  </div>
-
-</footer>
-
-
     </body>
 </html>

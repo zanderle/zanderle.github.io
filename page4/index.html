@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="shortcut icon" href="/images/favicon.png"> -->
     <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
-    <link rel="canonical" href="http://yourdomain.com/page4/">
+    <link rel="canonical" href="http://musingsonmusic.com/page4/">
 
     <!-- Custom CSS -->
 <!--    <link rel="stylesheet" href="/css/main.css"> -->
@@ -17,6 +17,8 @@
     <!-- SCSS, baby -->
     <link rel="stylesheet" href="/css/style.css">
     <script src="js/modernizr.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/default.js"></script>
 </head>
 
 
@@ -24,64 +26,94 @@
       <div id="wrap">
         <header class="site-header row clear">
 
-    <nav class="social-media-nav col col-3">
-      <a class="icon-twitter twitter left inline-block" href="https://twitter.com/z_anderle" target="_blank"></a>
-      <a class="icon-instagramm instagram left inline-block" href="https://instagram.com/zanderle" target="_blank"></a>
-      <a class="icon-rss rss-feed left inline-block" href="/feed.xml"></a>
+    <nav class="social-media-nav col col-3 tablet-col-4 mobile-no-padding mobile-no-margin">
+      <ul class="mobile-no-margin">
+        <li class="inline-block">
+          <a class="icon-twitter twitter mobile-no-margin" href="https://twitter.com/z_anderle" target="_blank"></a>
+        </li>
+        <li class="inline-block">
+          <a class="icon-instagramm instagram mobile-no-margin" href="https://instagram.com/zanderle" target="_blank"></a>
+        </li>
+        <li class="inline-block">
+          <a class="icon-rss rss-feed mobile-no-margin" href="/feed.xml"></a>
+        </li>
+      </ul>
     </nav>
-    <div class="logo-wrapper col col-6">
+    <div class="logo-wrapper col col-6 tablet-col-4">
       <a class="main-logo container block" href="/"></a>
     </div>
-    <div class="menu-wrapper col col-3">
-      <a class="icon-menu right inline-block"></a>
+    <div class="menu-wrapper col col-3 tablet-col-4">
+      <a class="icon-menu right inline-block higher" id="menu" href="#"></a>
     </div>
-
-    <nav class="site-nav">
-      <div class="trigger">
+    <nav class="site-nav right">
+      <ul class="no-padding no-margin">
+        <li class="inline-block">
+          <a class="page-link" href="#">Home</a>
+        </li>
         
-          <a class="page-link" href="/about/">About</a>
+            
+            
+            
         
-          
+            
+            
+          <li class="inline-block">
+            <a class="page-link" href="/about/">About</a>
+          </li>
+            
+            
         
-          
+            
         
-          <a class="page-link" href="/nekajdrugega/">Testing</a>
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-          
+            
+            
+            
         
-      </div>
+      </ul>
     </nav>
+
 
 
 </header>
+
 <div class="subheader text-center">
-<h4 class="white heading">Music can be a form of perfection - with nothing added or subtracted, flawless just the way it is.</h4>
+<h4 class="white heading inline-block">Music can be a form of perfection - with nothing added or subtracted, flawless just the way it is.</h4>
 </div>
 
 
-        <div class="content row clear container">
+        <div class="row clear container">
           <div class="home">
 
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/jazz/nina/strnad/women/2012/12/03/Nina-Strnad,-a-Slovenian-gem/">Nina Strnad, a Slovenian gem</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://24.media.tumblr.com/tumblr_mdysrzSCi21rln1mco1_1280.jpg" alt="" /></p>
 
 <p>Nina Strnad by Žan Anderle</p>
@@ -153,10 +185,10 @@ and because she’s actually my favourite female singer, who is still alive.  </
 <p>Thoughts, anyone?</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2012-12-03 10:24:52 UTC</span>
+    <span class="inline-block">3. December 2012</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/jazz/nina/strnad/women/2012/12/03/Nina-Strnad,-a-Slovenian-gem/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -168,18 +200,18 @@ and because she’s actually my favourite female singer, who is still alive.  </
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/r'n'b/soul/stevie/wonder/2012/11/29/Stevie-Wonder/">Stevie Wonder</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://revivalist.okayplayer.com/wp-content/uploads/Stevie+Wonder+PNG-
 1024x906.png" alt="" /></p>
 
@@ -246,10 +278,10 @@ in general. No words here, just listen.  </p>
 <p>I’m sure everyone has a favourite Stevie Wonder song, so please share!</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2012-11-29 19:53:26 UTC</span>
+    <span class="inline-block">29. November 2012</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/r'n'b/soul/stevie/wonder/2012/11/29/Stevie-Wonder/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -261,18 +293,18 @@ in general. No words here, just listen.  </p>
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/blues/jazz/nina/simone/soul/women/2012/11/26/Nina-Simone/">Nina Simone</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://cdn.madamenoire.com/wp-content/uploads/2012/08/Nina+Simone.jpg" alt="" /></p>
 
 <p>Nina Simone</p>
@@ -304,10 +336,10 @@ I can’t quite get to the bottom of it.  </p>
 her or her music?</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2012-11-26 00:13:50 UTC</span>
+    <span class="inline-block">26. November 2012</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/blues/jazz/nina/simone/soul/women/2012/11/26/Nina-Simone/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -319,18 +351,18 @@ her or her music?</p>
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/billie/holiday/blues/dinah/washington/jazz/women/2012/11/20/Dinah-Washington/">Dinah Washington</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://1.bp.blogspot.com/-dxAkPzVfz4s/T9gtvYq461I/AAAAAAAALPg/mHZsMf_dIvY/
 s1600/Dinah+Washington.jpg" alt="" /></p>
 
@@ -437,10 +469,10 @@ Washington songs? Comment away.  </p>
 everyone.</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2012-11-20 11:42:28 UTC</span>
+    <span class="inline-block">20. November 2012</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/billie/holiday/blues/dinah/washington/jazz/women/2012/11/20/Dinah-Washington/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -452,18 +484,18 @@ everyone.</p>
 </div>
 
 <div class="post">
-  <h2 class="post-title text-center heading row clear">
-    <div class="col col-4">
-      <span class="fleur block right"></span>
+  <h2 class="post-title text-center heading row mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
     </div>
-    <div class="col col-4">
+    <div class="col col-4 tablet-col-6 mobile-full">
       <a href="/billie/holiday/blues/dinah/washington/etta/james/jazz/soul/women/2012/11/19/Etta-James/">Etta James</a>
     </div>
-    <div class="col col-4">
-      <span class="fleur block left"></span>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
     </div>
   </h2>
-  <div class="content">
+  <article class="content">
     <p><img src="http://therogersrevue.files.wordpress.com/2012/01/etta-james.jpg" alt="" /></p>
 
 <p>Etta James</p>
@@ -536,10 +568,10 @@ what they came up with. A haunting, painful and poignant piece of music.  </p>
 experiences with her music? Please, share your thoughts!</p>
 
 
-  </div>
+  </article>
   <div class="text-center">
     <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">2012-11-19 01:10:16 UTC</span>
+    <span class="inline-block">19. November 2012</span>
     <i class="icon-comment-empty inline-block"></i>
     <a href="/billie/holiday/blues/dinah/washington/etta/james/jazz/soul/women/2012/11/19/Etta-James/#disqus_thread"></a>
     <i class="icon-tag inline-block"></i>
@@ -549,7 +581,53 @@ experiences with her music? Please, share your thoughts!</p>
 </div>
 
 
+
+
+<div class="pagination text-center row clear">
+  <div class="pagination-box inline-block">
+    
+      <a class="page-box inline-block" href="/page3">&laquo; Prev</a>
+    
+
+    
+      
+        <a class="page-box inline-block" href="/index.html">1</a>
+      
+    
+      
+        <a class="page-box inline-block" href="/page2">2</a>
+      
+    
+      
+        <a class="page-box inline-block" href="/page3">3</a>
+      
+    
+      
+        <span class="page-box inline-block active">4</span>
+      
+    
+      
+        <a class="page-box inline-block" href="/page5">5</a>
+      
+    
+
+    
+      <a class="page-box inline-block" href="/page5">Next &raquo;</a>
+    
+  </div>
 </div>
+
+
+</div>
+
+
+        </div>
+      </div>
+
+    <footer class="row clear text-center gray">
+    <a href="/" class="footer-heading inline-block gray">My Musings on Music</a> - content and design by Žan Anderle
+</footer>
+
 
     <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -563,21 +641,5 @@ experiences with her music? Please, share your thoughts!</p>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
     </script>
-
-
-        </div>
-      </div>
-
-    <footer class="site-footer">
-
-  <div class="wrap">
-
-    <h2 class="footer-heading">My Musings on Music</h2> content and design by Žan Anderle
-
-  </div>
-
-</footer>
-
-
     </body>
 </html>

@@ -3,15 +3,17 @@
   <channel>
     <title>My Musings on Music</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 01 Aug 2014 16:26:45 +0200</pubDate>
-    <lastBuildDate>Fri, 01 Aug 2014 16:26:45 +0200</lastBuildDate>
+    <link>http://musingsonmusic.com/</link>
+    <atom:link href="http://musingsonmusic.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 04 Aug 2014 19:15:48 +0200</pubDate>
+    <lastBuildDate>Mon, 04 Aug 2014 19:15:48 +0200</lastBuildDate>
     <generator>Jekyll v2.1.0</generator>
     
       <item>
         <title>How I got into jazz</title>
-        <description>&lt;p&gt;&lt;img src=&quot;http://1.bp.blogspot.com/-xOBj9x28df0/U7RhzavFqjI/AAAAAAAABo4/srzLXZOH9uE/
+        <description>&lt;h4 id=&quot;a-story-about-how-coincidences-can-lead-to-amazing-things&quot;&gt;A story about how coincidences can lead to amazing things.&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://1.bp.blogspot.com/-xOBj9x28df0/U7RhzavFqjI/AAAAAAAABo4/srzLXZOH9uE/
 s1600/63.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It has been too long. I haven’t written a post for over a year. I devoted all
@@ -103,8 +105,8 @@ found my passion.&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 02 Jul 2014 19:48:27 -0000</pubDate>
-        <link>http://yourdomain.com/jazz/louis/armstrong/story/2014/07/02/How-I-got-into-jazz/</link>
-        <guid isPermaLink="true">http://yourdomain.com/jazz/louis/armstrong/story/2014/07/02/How-I-got-into-jazz/</guid>
+        <link>http://musingsonmusic.com/jazz/louis/armstrong/story/2014/07/02/How-I-got-into-jazz/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/jazz/louis/armstrong/story/2014/07/02/How-I-got-into-jazz/</guid>
         
         
         <category>jazz</category>
@@ -210,8 +212,8 @@ JALC, the post? As I always, I encourage you to share your comments.  &lt;/p&gt;
 
 </description>
         <pubDate>Sun, 15 Jun 2014 18:42:08 -0000</pubDate>
-        <link>http://yourdomain.com/bobby/mcferrin/collaboration/concert/jazz/at/lincoln/center/wynton/marsalis/2014/06/15/Bobby-McFerrin-&-Wynton-Marsalis/</link>
-        <guid isPermaLink="true">http://yourdomain.com/bobby/mcferrin/collaboration/concert/jazz/at/lincoln/center/wynton/marsalis/2014/06/15/Bobby-McFerrin-&-Wynton-Marsalis/</guid>
+        <link>http://musingsonmusic.com/bobby/mcferrin/collaboration/concert/jazz/at/lincoln/center/wynton/marsalis/2014/06/15/Bobby-McFerrin-&-Wynton-Marsalis/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/bobby/mcferrin/collaboration/concert/jazz/at/lincoln/center/wynton/marsalis/2014/06/15/Bobby-McFerrin-&-Wynton-Marsalis/</guid>
         
         
         <category>bobby</category>
@@ -347,8 +349,8 @@ in them. I’m not sure though, we’ll see.&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 07 Jul 2013 19:11:06 -0000</pubDate>
-        <link>http://yourdomain.com/band/cajun/doo/wop/etno/folk/instrumental/music/rap/slovenian/2013/07/07/Salonski---Fauna/</link>
-        <guid isPermaLink="true">http://yourdomain.com/band/cajun/doo/wop/etno/folk/instrumental/music/rap/slovenian/2013/07/07/Salonski---Fauna/</guid>
+        <link>http://musingsonmusic.com/band/cajun/doo/wop/etno/folk/instrumental/music/rap/slovenian/2013/07/07/Salonski---Fauna/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/band/cajun/doo/wop/etno/folk/instrumental/music/rap/slovenian/2013/07/07/Salonski---Fauna/</guid>
         
         
         <category>band</category>
@@ -495,8 +497,8 @@ much, just listen and let yourself feel the wonders of music.&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 11 Apr 2013 21:38:44 -0000</pubDate>
-        <link>http://yourdomain.com/instrumental/music/jazz/miles/davis/2013/04/11/In-A-Silent-Way/</link>
-        <guid isPermaLink="true">http://yourdomain.com/instrumental/music/jazz/miles/davis/2013/04/11/In-A-Silent-Way/</guid>
+        <link>http://musingsonmusic.com/instrumental/music/jazz/miles/davis/2013/04/11/In-A-Silent-Way/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/instrumental/music/jazz/miles/davis/2013/04/11/In-A-Silent-Way/</guid>
         
         
         <category>instrumental</category>
@@ -595,8 +597,8 @@ about next time?&lt;/p&gt;
 
 </description>
         <pubDate>Mon, 01 Apr 2013 21:46:23 -0000</pubDate>
-        <link>http://yourdomain.com/ben/harper/blues/collaboration/gospel/the/blind/boys/of/alabama/2013/04/01/There-Will-Be-a-Light/</link>
-        <guid isPermaLink="true">http://yourdomain.com/ben/harper/blues/collaboration/gospel/the/blind/boys/of/alabama/2013/04/01/There-Will-Be-a-Light/</guid>
+        <link>http://musingsonmusic.com/ben/harper/blues/collaboration/gospel/the/blind/boys/of/alabama/2013/04/01/There-Will-Be-a-Light/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/ben/harper/blues/collaboration/gospel/the/blind/boys/of/alabama/2013/04/01/There-Will-Be-a-Light/</guid>
         
         
         <category>ben</category>
@@ -698,8 +700,8 @@ appreciated.&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 17 Jan 2013 10:55:46 -0000</pubDate>
-        <link>http://yourdomain.com/ella/fitzgerald/jazz/louis/armstrong/women/2013/01/17/The-First-Lady-Of-Song/</link>
-        <guid isPermaLink="true">http://yourdomain.com/ella/fitzgerald/jazz/louis/armstrong/women/2013/01/17/The-First-Lady-Of-Song/</guid>
+        <link>http://musingsonmusic.com/ella/fitzgerald/jazz/louis/armstrong/women/2013/01/17/The-First-Lady-Of-Song/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/ella/fitzgerald/jazz/louis/armstrong/women/2013/01/17/The-First-Lady-Of-Song/</guid>
         
         
         <category>ella</category>
@@ -782,8 +784,8 @@ Ambassadors by Ricky Riccardi. Check it out!&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 17 Jan 2013 10:54:38 -0000</pubDate>
-        <link>http://yourdomain.com/dave/brubeck/jazz/louis/armstrong/2013/01/17/Dave-Brubeck/</link>
-        <guid isPermaLink="true">http://yourdomain.com/dave/brubeck/jazz/louis/armstrong/2013/01/17/Dave-Brubeck/</guid>
+        <link>http://musingsonmusic.com/dave/brubeck/jazz/louis/armstrong/2013/01/17/Dave-Brubeck/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/dave/brubeck/jazz/louis/armstrong/2013/01/17/Dave-Brubeck/</guid>
         
         
         <category>dave</category>
@@ -888,8 +890,8 @@ music? What are your favourites?&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 17 Jan 2013 10:53:12 -0000</pubDate>
-        <link>http://yourdomain.com/christmas/jazz/louis/armstrong/vince/guaraldi/wynton/marsalis/2013/01/17/Christmas-Special/</link>
-        <guid isPermaLink="true">http://yourdomain.com/christmas/jazz/louis/armstrong/vince/guaraldi/wynton/marsalis/2013/01/17/Christmas-Special/</guid>
+        <link>http://musingsonmusic.com/christmas/jazz/louis/armstrong/vince/guaraldi/wynton/marsalis/2013/01/17/Christmas-Special/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/christmas/jazz/louis/armstrong/vince/guaraldi/wynton/marsalis/2013/01/17/Christmas-Special/</guid>
         
         
         <category>christmas</category>
@@ -979,8 +981,8 @@ next.  &lt;/p&gt;
 
 </description>
         <pubDate>Thu, 17 Jan 2013 10:46:31 -0000</pubDate>
-        <link>http://yourdomain.com/christmas/ella/fitzgerald/james/brown/jazz/ray/charles/soul/2013/01/17/Christmas-special,-part-2/</link>
-        <guid isPermaLink="true">http://yourdomain.com/christmas/ella/fitzgerald/james/brown/jazz/ray/charles/soul/2013/01/17/Christmas-special,-part-2/</guid>
+        <link>http://musingsonmusic.com/christmas/ella/fitzgerald/james/brown/jazz/ray/charles/soul/2013/01/17/Christmas-special,-part-2/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/christmas/ella/fitzgerald/james/brown/jazz/ray/charles/soul/2013/01/17/Christmas-special,-part-2/</guid>
         
         
         <category>christmas</category>
@@ -1064,8 +1066,8 @@ requests, I would love to hear from you!&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 17 Jan 2013 10:44:45 -0000</pubDate>
-        <link>http://yourdomain.com/otis/redding/sam/cooke/solomon/burke/soul/2013/01/17/Otis-Redding/</link>
-        <guid isPermaLink="true">http://yourdomain.com/otis/redding/sam/cooke/solomon/burke/soul/2013/01/17/Otis-Redding/</guid>
+        <link>http://musingsonmusic.com/otis/redding/sam/cooke/solomon/burke/soul/2013/01/17/Otis-Redding/</link>
+        <guid isPermaLink="true">http://musingsonmusic.com/otis/redding/sam/cooke/solomon/burke/soul/2013/01/17/Otis-Redding/</guid>
         
         
         <category>otis</category>
