@@ -11,6 +11,8 @@
     <meta name="description" content="I believe music can be a form of perfection - with nothing added or subtracted, flawless just the way it is. This is my take on the music and the people that make it. It's mostly about jazz and blues. Content and design by Žan Anderle">
     <link rel="canonical" href="http://musingsonmusic.com/page2/">
 
+    
+
     <!-- Custom CSS -->
 <!--    <link rel="stylesheet" href="/css/main.css"> -->
     <link href='http://fonts.googleapis.com/css?family=Belleza|Droid+Serif' rel='stylesheet' type='text/css'>
@@ -118,6 +120,266 @@
         <div class="row clear container">
           <div class="home">
 
+
+<div class="post">
+  <h2 class="post-title text-center heading row clear mobile-no-padding">
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block right no-mobile"></span>
+    </div>
+    <div class="col col-4 tablet-col-6 mobile-full">
+      <a href="/2014/08/17/Sun-Ra-Discography/">Sun Ra Discography</a>
+    </div>
+    <div class="col col-4 tablet-col-3">
+      <span class="fleur block left no-mobile"></span>
+    </div>
+  </h2>
+  <article class="content">
+    <h4 id="sun-ras-eclectic-and-prolific-discography-visualized">Sun Ra’s eclectic and prolific discography, visualized</h4>
+
+<div id="sunra-container">
+    <div id="sunra"></div>
+    <div class="row text-center no-margin no-padding">
+        <div class="button-container">
+            <a href="#" class="button belleza" id="ratings-button">Show Allmusic Ratings</a>
+        </div>
+    </div>
+    <div class="row clear">
+        <div class="sunra-cover left breathe col-2"></div>
+        <div class="sunra-content left col-6">
+            Year: <h2 class="year"><span></span></h2>
+            Title: <h3 class="title"><span></span></h3>
+            Author: <h3 class="author"><span></span></h3>
+        </div>
+        <div class="sunra-content left col-3">
+            Recorded in: <h3 class="dates"><span></span></h3>
+            in <h3 class="locations"><span></span></h3>
+        </div>
+    </div>
+    <div class="row clear review-content">
+        <div class="col col-2">
+            Review by: <h3 class="review-by"><span></span></h3> <br />
+            <a href="#" class="allmusic-link" target="_blank">Allmusic page</a>
+        </div>
+        <div class="col push-1 col-9"><blockquote class="review no-margin"></blockquote></div>
+    </div>
+</div>
+
+<p><em class="none show-mobile">Unfortunately this interactive visualization is not supported on mobile devices. Come check it out on your tablet or computer.</em></p>
+
+<p>[EDIT] Since I first posted this, I updated the visualization with some additional data from <a href="http://www.allmusic.com/artist/sun-ra-mn0000924232/discography">allmusic</a>.</p>
+
+<p>With over 1000 recorded songs spanned over more than 100 albums, Sun Ra was one of the most prolific artists of the 20th century. I decided to make a simple visualization of this enormous body of work. I soon realized, this is no easy task. For one, the discography data is confusing to say the least. For a lot of albums, it is unclear who was in the band or where or when it was recorded. The band members themselves often gave conflicting reports regarding these things. I did my best with the data I could find in the <a href="http://www.the-temple.net/sunradisco/list.php">discography online</a>.<br />
+After that confusion, I had to make a decision about which data to show. I eventually decided I am only going to visualize full-length albums (so excluding singles and records where Sun Ra appeared as guest).  </p>
+
+<p>So here it is - a simple timeline of Sun Ra’s recorded work. The albums are positioned on the timeline based on the year they were released (or if they have not been released - when they were recorded). The colors represent the whereabouts of recording sessions. If you hover over specific works, additional information will show up.
+I might eventually expand it with some more features, but that’s it for now. I hope you like it :).  </p>
+
+<p>Let me know what you think!</p>
+
+<p><span class="font-small">A few technical details, for those interested. I used <a href="http://d3js.org/">d3</a> library for the actual visualization. To get the data from the website I mentioned earlier, I used <a href="http://import.io">import.io</a> (which was a joy to use, if I may add). And finally for parsing and cleaning up, Python was the way to go.</span></p>
+
+<script type="text/javascript" src="/js/d3.min.js"></script>
+
+<script type="text/javascript" src="/js/sunra_disco.js"></script>
+
+<script type="text/javascript">
+// Set the dimensions of the canvas / graph
+var margin = {top: 30, right: 30, bottom: 30, left: 30};
+var width = $('.post').width() - margin.left - margin.right;
+var height = 270 - margin.top - margin.bottom;
+
+// Other variables
+
+// Prepare data
+var yearlyData = d3.nest()
+                    .key(function(d) { return d.release_date; })
+                    .sortKeys(d3.ascending)
+                    .entries(data);
+var maxPerYear = d3.max(yearlyData, function(d) { return d.values.length; });
+
+// Set scales
+var xScale = d3.scale.ordinal()
+                    .rangeBands([0, width], 0.52, 0.05)
+                    .domain(d3.range(d3.min(data, function(d) { return d.release_date - 1; }), d3.max(data, function(d) { return d.release_date + 1; })));
+var yScale = d3.scale.ordinal()
+                    .rangeBands([height, 0], 0, 0.1)
+                    .domain(d3.range(0, maxPerYear));
+var cScale = d3.scale.ordinal()
+                .range(["#a6cee3","#1f78b4","#b2df8a","#555","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928", "#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"])
+                .domain(data, function(d) { return d.recording_locations.join(' or '); });
+var oScale = d3.scale.linear()
+                .range([0.2, 1.0])
+                .domain([0, 10]);
+var rScale = d3.scale.linear()
+                .range([xScale.rangeBand()*0.7, xScale.rangeBand()*1.5])
+                .domain([0, 10]);
+
+// Scale helper
+var centered = function(i) {
+// Function that starts from the center of the interval and spreads out
+    return Math.floor(maxPerYear/2) - (i - Math.floor(i/2))*Math.pow(-1, i);
+};
+
+// Set axis
+var xAxis = d3.svg.axis().scale(xScale).orient('bottom').tickValues(['1956', '1960', '1970', '1980', '1990', '1998']);
+
+// Add svg canvas
+var svg = d3.select("#sunra").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Add covers
+var defs = svg.append('defs');
+defs.selectAll('pattern')
+    .data(data)
+    .enter()
+    .append('pattern')
+    .attr('id', function(d) { return d.title.replace(/\s+|\(|\)|\'/g, '-'); })
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('height', 1)
+    .attr('width', 1)
+    .attr('viewBox', '0 0 100 100')
+    .attr('preserveAspectRatio', 'none')
+    .append('image')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('height', 100)
+    .attr('width', 100)
+    .attr('preserveAspectRatio', 'none')
+    .attr('xlink:href', function(d) { return d.cover; });
+
+// Add albums
+var g = svg.selectAll('g').data(yearlyData).enter()
+        .append('g')
+        .attr('transform', function(d) { return 'translate(' + xScale(d.key) + ', 0)'; });
+var records = g.selectAll('circle')
+    .data(function(d) { return d.values; })
+    .enter()
+    .append('circle')
+    .attr('class', 'record')
+    .attr('r', xScale.rangeBand())
+    .attr('cy', function(d, i) { return yScale(centered(i)); })
+    .style('fill', function(d) { return 'url(#' + d.title.replace(/\s+|\(|\)|\'/g, '-') + ')'; })
+    .style('stroke', function(d) { return cScale(d.recording_locations); });
+
+// Add axis
+svg.append('g')
+    .attr('class', 'x axis')
+    .attr('transform', function(d) { return 'translate(0, ' + height + ')'; })
+    .call(xAxis);
+
+// Interactivity
+var lock = false;
+records.on('mouseover', function(d) {
+    if (!lock) {
+        d3.select(this)
+            .transition()
+            .duration(100)
+            .attr('r', 25)
+            .style('stroke-width', 4);
+        d3.select('.sunra-cover')
+            .style('background-image', function() { return 'url("' + d.cover + '")'; });
+        $('.sunra-content').show();
+        $('.sunra-content .year span').html(d.release_date);
+        $('.sunra-content .title span').html(d.title);
+        $('.sunra-content .author span').html(d.author);
+        $('.sunra-content .dates span').html(d.recording_dates.join(', '));
+        $('.sunra-content .locations span').html(d.recording_locations.join(', '));
+        if (d.review != "") {
+            $('.review-content').fadeIn(200);
+            $('.review-content .review').html(d.review)
+                                        .attr('cite', d.allmusic_url);
+            $('.review-content .review-by span').html(d.review_by);
+            $('.review-content .allmusic-link').attr('href', d.allmusic_url);
+        }
+        else {
+            $('.review-content').fadeOut(400);
+        }
+    }
+}).on('click', function() {
+    if (lock) {
+        d3.select(this)
+            .transition()
+            .duration(100)
+            .attr('r', 25)
+            .style('stroke-width', 4);
+        lock = false;
+    } else {
+        d3.select(this)
+            .transition()
+            .duration(100)
+            .attr('r', 30)
+            .style('stroke-width', 5);
+        lock = true;
+    }
+}).on('mouseout', function() {
+    if (!lock) {
+        if ($('#ratings-button').hasClass('active')) {
+            d3.select(this)
+                .transition()
+                .duration(200)
+                .attr('r', function(d) { return rScale(d.allmusic_rating); })
+                .style('stroke-width', 2);
+        } else {
+            d3.select(this)
+                .transition()
+                .duration(200)
+                .attr('r', xScale.rangeBand())
+                .style('stroke-width', 2);
+        }
+    }
+});
+
+$('#ratings-button').on('click', function(e) {
+    lock = false;
+    e.preventDefault();
+    var button = $('#ratings-button');
+    button.toggleClass('active');
+    if (button.hasClass('active')) {
+        records.transition()
+                .duration(200)
+                .style('opacity', function(d) { return oScale(d.allmusic_rating); })
+                .style('stroke-width', 2)
+                .attr('r', function(d) { return rScale(d.allmusic_rating); });
+    } else {
+        records.transition()
+                .duration(200)
+                .style('opacity', 1)
+                .style('stroke-width', 2)
+                .attr('r', xScale.rangeBand());
+    }
+})
+
+// Razbij albume na recording sessions
+// Več informacij za posamezen album
+
+</script>
+
+
+  </article>
+  <div class="text-center misc">
+    <div class="mobile-full inline-block">
+    <i class="icon-calendar-empty inline-block"></i>
+    <span class="inline-block">17. August 2014</span>
+    </div>
+    
+    <div class="mobile-full inline-block">
+    <i class="icon-comment-empty inline-block"></i>
+    <a class="count-disqus-comments" href="http://musingsonmusic.com/2014/08/17/Sun-Ra-Discography/#disqus_thread" data-disqus-url="http://musingsonmusic.com/2014/08/17/Sun-Ra-Discography/"></a>
+    
+    </div>
+    <div class="col-12 mobile-full inline-block">
+    <i class="icon-tag inline-block"></i>
+    <span class="inline-block tags">Sun Ra Visualization</span>
+    </div>
+  </div>
+  
+    <div class="line"></div>
+  
+</div>
 
 <div class="post">
   <h2 class="post-title text-center heading row clear mobile-no-padding">
@@ -483,7 +745,7 @@ inspiration to me - everytime I listen to the album I can’t believe that this
 unique piece of music was created by a group of students for whom music is
 just something they do on the side.</p>
 
-<p>You can listen to Fauna on this <a href="http://salonski.bandcamp.com/">link</a>, where
+<p>You can listen to Fauna on this <a href="http://salonski.bandcamp.com/" target="_blank">link</a>, where
 you can also purchase it.</p>
 
 <p>From the first time I heard they’re recording an album, I could hardly wait
@@ -569,157 +831,6 @@ in them. I’m not sure though, we’ll see.</p>
     <div class="col-12 mobile-full inline-block">
     <i class="icon-tag inline-block"></i>
     <span class="inline-block tags">Band Cajun Doo Wop Etno Folk Instrumental music Rap Slovenian</span>
-    </div>
-  </div>
-  
-    <div class="line"></div>
-  
-</div>
-
-<div class="post">
-  <h2 class="post-title text-center heading row clear mobile-no-padding">
-    <div class="col col-4 tablet-col-3">
-      <span class="fleur block right no-mobile"></span>
-    </div>
-    <div class="col col-4 tablet-col-6 mobile-full">
-      <a href="/2013/04/10/In-A-Silent-Way/">In A Silent Way</a>
-    </div>
-    <div class="col col-4 tablet-col-3">
-      <span class="fleur block left no-mobile"></span>
-    </div>
-  </h2>
-  <article class="content">
-    <p><img src="/img/2F-zgioX-rhAYY2FUWctQk0KOjI2FAAAAAAAABTQ2FpU4fCnTemww2Fs16002Fcover_481121122010.jpg" alt="" /></p>
-
-<p>For some reason, I’m really afraid of writing about instrumental music. Even
-though I really want to, basically all my posts so far have been about music
-that includes a singer. After confiding in <a href="http://mitrovic.co/blog/">my
-friend</a> about this fear, he made a great suggestion:
-we would tell each other which instrumental album to write about on our next
-blog post, and just do it. It was exactly the kind of motivation I needed. So
-here I am, nervous and afraid, writing my very first post about a piece of
-solely instrumental music.</p>
-
-<p>The album my friend chose for me is <a href="http://www.amazon.com/gp/product/B00006GO9Q/ref=as_li_qf_sp_asin_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=B00006GO9Q&amp;linkCode=as2&amp;tag=mythougonmusi-20">In a Silent Way</a><img src="http://www.assoc-amazon.com/e/ir?t=mythougonmusi-20&amp;l=as2&amp;o=1&amp;a=B00006GO9Q" alt="" /> by Miles Davis. I
-usually talk about the artist for a little bit, but if I wanted to talk about
-Miles, one whole post probably wouldn’t suffice, so I’ll make it extra brief.
-Miles Davis, born in 1926, was a jazz trumpeter and one of the most
-influential musicians in the 20th century. For 50 years, he basically kept
-inventing new genres and explored jazz in so many new directions (Bebop, Hard
-bop, Modal jazz, Fusion, Cool jazz). It’s safe to say that jazz today wouldn’t
-be where it is without him. If you don’t know who he is, you might want to
-read something about him, as he is one of the most important figures of the
-20th century music. Or better yet, listen to some of his classic albums -
-<a href="http://www.youtube.com/watch?v=VmaQdPoWVGM">Kind Of Blue</a>, <a href="http://www.youtube.com/watch?v=9sVapY6JDu8">‘Round About
-Midnight</a> or
-<a href="http://www.youtube.com/watch?v=38bShXrS7pM">Milestones</a>. Keep in mind though,
-that that is only a tiny part of his musical career - what he’s created over
-the years ranges far beyond these three albums.</p>
-
-<p>When I first started listening to
-jazz and heard about Miles Davis, I just didn’t get it why he’s supposed to be
-so good. Sure, I liked Kind Of Blue, but that’s about it. It was making me
-kind of annoyed, that everyone was praising him so much. I thought he was
-overrated and was frustrated that no one else saw that. Even with this
-opinion, I didn’t think his early stuff was bad or anything, whereas the weird
-fusion thingy, I just couldn’t take. His <a href="http://www.youtube.com/watch?v=y7mHNEA7z2U">weird
-appearance</a> on stage didn’t help
-with that. So, very early on, I decided that I don’t really care for Miles
-Davis and that I hate jazz fusion.</p>
-
-<p><img src="/img/2F-B1a2Tm9SnFk2FUWctVDOlvKI2FAAAAAAAABTY2F-svjWC-iVoo2Fs16002Fmiles-davis-by-jan-persson.jpg" alt="" /></p>
-
-<p>Four years of listening to jazz (but avoiding Miles and anything similar)
-later, I suddenly found myself getting more and more interested in Bebop,
-Avant-Garde, Modern jazz, all the stuff I thought I didn’t like. Just like
-that, Miles’ music eventually crept back to me after all that time. I gave the
-albums I knew, another listen and was surprised that this was the same music
-as the kind I used to dislike. It sounded differently. I loved it! There were
-so many beautiful things happening in the music and I couldn’t understand how
-I couldn’t hear that before. Even though I had evidence against me, I kept my
-skepticism against Miles.</p>
-
-<p>So when my friend asked me to write about Miles Davis’ album, you can imagine
-how I was unsure about that. I thought to myself “how on earth am I going to
-write about this?? I’m probably not even going to like it”. Nevertheless, I
-decided that, for once in my life, I’ll get out of my own way, and agreed on
-the choice. It turns out, I LOVE the album! It’s one of the most intriguing
-things I’ve ever heard. As if that wasn’t enough of a surprise, I found out
-that In A Silent Way is supposed to be the first fusion album Miles recorded.
-. . I was confused, “Wait, aren’t I suppose to hate fusion jazz? But this
-sounds so good. How come?”. After a few seconds of thinking about it, the
-music took over and it didn’t matter anymore.</p>
-
-<p><a href="http://www.youtube.com/watch?v=OmQwzAsOw1k">The album</a> itself is wonderful!
-It’s dreamy, contemplative, other-worldly, melancholic, magical and even dark.
-I don’t know if I’ve mentioned this before, but I’ve always been fascinated by
-dreams and everything related to them. So it’s probably just me, but I feel
-like this whole album is about dreams, which is why I absolutely love it.</p>
-
-<p>The first song, Shhh/Peaceful, starts off with just the drums, organ, piano,
-bass and guitar letting you look around and get the feeling of what the song
-is going to look like. They set the stage for Miles, and when he comes in, he
-glides on top of that background, as smooth as ever. Listen to his tone and
-articulation. He’s got such control over his instrument, it sounds like it’s
-not just a trumpet, but an extension of his thoughts.</p>
-
-<p>The song then goes on and develops like dreams do. And you know how in dreams
-something’s always off and even though you’re somehow aware of it, everything
-feels just right anyway. Well, listen how the drums provide a really groovy
-and quite powerful beat, but the music itself is so mellow and gentle. At
-first it sounds a bit off, but after awhile it just feels right.</p>
-
-<p>Another correlation between this song and dreams is how many details the sound
-has. No matter where you look, there’s always a detail you didn’t hear before.</p>
-
-<p>The song continues making an impression like that until, just after becoming
-slightly turbulent, it rolls off.</p>
-
-<p>At this point, I was already totally in awe, but there was another part, just
-as good as the first one. What a treat!</p>
-
-<p>The second song, In a Silent Way/It’s About That Time, begins so darn
-beautifully! It sounds so optimistic and hopeful, something like a beautiful
-landscape after a storm. After you get a chance to really hear this gorgeous
-sound, the flow changes quite abruptly and they start building on top of that.
-It feels like this beautiful music is delicate and sensitive, since after a
-slight change, everything follows. I guess it sounds like, what I think a
-development of an idea in someone’s mind would sound like - from that first
-inkling to a full-blown idea. In any case, an amazing second part to this
-unbelievable album.</p>
-
-<p>Listening to and thinking about this album was a really wonderful experience.
-I sat in a cozy chair, dimmed the lights and set the music to a comfortable
-volume. Then I listened. . . I mean really listened. I was shocked by how many
-things I could actually hear. If I had listened to this about a year ago, I
-would have thought it’s nonsense. I guess I must have had some kind of
-invisible earplugs in my ears.</p>
-
-<p>Forty minutes of this dreamy music went by like four minutes. The whole album
-is filled with so many thoughts, feelings and emotions, I found myself
-thinking about it for some time after it stopped playing. And I love how great
-music inspires me to listen to even more music, which is exactly what happened
-in the next few days.</p>
-
-<p>I suggest you give In a Silent Way a listen as well. Don’t think about it too
-much, just listen and let yourself feel the wonders of music.</p>
-
-
-  </article>
-  <div class="text-center misc">
-    <div class="mobile-full inline-block">
-    <i class="icon-calendar-empty inline-block"></i>
-    <span class="inline-block">10. April 2013</span>
-    </div>
-    
-    <div class="mobile-full inline-block">
-    <i class="icon-comment-empty inline-block"></i>
-    <a class="count-disqus-comments" href="http://musingsonmusic.com/2013/04/10/In-A-Silent-Way/#disqus_thread" data-disqus-url="http://musingsonmusic.com/2013/04/10/In-A-Silent-Way/"></a>
-    
-    </div>
-    <div class="col-12 mobile-full inline-block">
-    <i class="icon-tag inline-block"></i>
-    <span class="inline-block tags">Instrumental music Jazz Miles Davis</span>
     </div>
   </div>
   
