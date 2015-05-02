@@ -18,6 +18,11 @@
     <link href='http://fonts.googleapis.com/css?family=Belleza|Droid+Serif' rel='stylesheet' type='text/css'>
     <!-- SCSS, baby -->
     <link rel="stylesheet" href="/css/style.css">
+    <!--[if lt IE 11]>
+    <style type="text/css">
+    .ie-warning { display: inline; }
+    </style>
+    <![endif]-->
     <script src="/js/modernizr.js"></script>
     <script src="/js/jquery-1.11.1.min.js"></script>
     <script src="/js/default.js"></script>
@@ -139,6 +144,8 @@
   <h4 id="louis-armstrongs-lifework-visualized">Louis Armstrong’s lifework visualized</h4>
 
 <div id="satchmo-container">
+    <div class="plot-clip">
+    </div>
     <div id="satchmo" style="width: 100%; overflow: auto;"></div>
     <div class="tooltip">
         <div class="gig"></div>
@@ -147,63 +154,117 @@
         <div class="lineup"></div>
         <div class="comments"></div>
     </div>
+    <div id="session-info"></div>
 </div>
 
 <p><em class="none show-mobile">Unfortunately this interactive visualization is not supported on mobile devices. Come check it out on your tablet or computer.</em></p>
 
-<p><span class="font-small">A few technical details, for those interested. I used <a href="http://d3js.org/">d3</a> library for the actual visualization. To get the data from the website I mentioned earlier, I used <a href="http://import.io">import.io</a> (which was a joy to use, if I may add). And finally for parsing and cleaning up, Python was the way to go.</span></p>
+<p><em class="ie-warning">This visualization might not work properly under your browser. Consider upgrading or getting a different browser.</em></p>
 
-<script type="text/javascript" src="/js/handlebars-v3.0.1.js"></script>
+<p><span class="font-small">A few technical details, for those interested. I used <a href="http://d3js.org/">d3</a> library for the actual visualization. To get the data from the website I mentioned earlier, I used <a href="http://import.io">import.io</a> (which was a joy to use, if I may add). And finally for parsing and cleaning up, Python was the way to go.</span></p>
 
 <script type="text/javascript" src="/js/d3.min.js"></script>
 
 <script type="text/javascript" src="/js/louis_armstrong.js"></script>
 
+<script type="text/javascript" src="/js/handlebars-v3.0.1.js"></script>
+
 <script id="event-template" type="text/x-handlebars-template">
+
   <div class="entry">
-    <h3></h3>
-    <div>
-      
-    </div>
+    <h3>{{title}}</h3>
+    <p>
+      {{body}}
+    </p>
   </div>
+
 </script>
 
-<script type="text/javascript">
+<script id="session-template" type="text/x-handlebars-template">
+
+<h3>{{name}}</h3>
+<h4>{{display_date}} - {{location}}</h4>
+<div class="first-section">
+<div class="inline-block left split">
+{{lineup}}
+</div>
+<div class="inline-block left split">
+  {{{songs}}}
+</div>
+</div>
+<br/>
+<br/>
+<div class="no-split block">
+{{comments}}
+</div>
+
+</script>
+
+<script async="" type="text/javascript">
+// $(document).ready(function () {
 // Set the dimensions of the canvas / graph
 var margin = {top: 40, right: 40, bottom: 40, left: 40};
-// var width = $('.post').width() - margin.left - margin.right;
-var width = 3200 - margin.left - margin.right;
+var width = $('.post').width() - margin.left - margin.right;
 var height = 600 - margin.top - margin.bottom;
 
-// Other variables
+$('.plot-clip').width(width)
+                .height(height)
+                .css({'left': margin.left, 'top': margin.top});
 
-// // Prepare data
-// var yearlyData = d3.nest()
-//                     .key(function(d) { return d.release_date; })
-//                     .sortKeys(d3.ascending)
-//                     .entries(data);
-// var maxPerYear = d3.max(yearlyData, function(d) { return d.values.length; });
+
+// Other variables
 
 // Date formater
 var dateFormat = d3.time.format('%0d.%0m.%Y');
 
 // Set scales
+var minDate = dateFormat.parse('4.8.1901');
+var maxDate = dateFormat.parse('6.7.1971');
 
 var xScale = d3.time.scale()
-                    .range([0, width])
-                    // .domain([dateFormat.parse(satchmo_data[0].display_date),
-                    //     dateFormat.parse(satchmo_data[satchmo_data.length -1].display_date)]);
-                    .domain([dateFormat.parse('4.8.1901'), dateFormat.parse('6.7.1971')]);
+            .range([0, width])
+            .domain([minDate, maxDate]);
 
 var cScale = d3.scale.ordinal()
-                    .range(["#a6cee3","#1f78b4","#b2df8a","#555","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928", "#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"])
-                    .domain(satchmo_data, function (d) { d.location; });
+            .range(["#8dd3c7","#d5d500","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"])
+            .domain(satchmo_data, function (d) { d.location_group; });
 
-// TODO:
-// - Barve
-// - Info
-// - Primer Eventa
-// - Moving average
+var rScale = d3.scale.linear()
+            .range([5, 18])
+            .domain(d3.extent(satchmo_data, function (d) { return d.members.length; }));
+
+// Zoom
+
+var zoom = d3.behavior.zoom()
+    .x(xScale)
+    .scaleExtent([1,100])
+    .on('zoom', zoomed);
+
+// Moving average
+
+var yValue = function(d) {
+    // Don't use this if you don't have to. Very expensive...
+    interval = 360;
+    low = d3.time.day.offset(d, -(interval/2));
+    high = d3.time.day.offset(d, interval/2);
+    // low = d3.time.day.offset(d, -interval);
+    // high = d;
+    function isInInterval (value) {
+        return ((dateFormat.parse(value.display_date) < high) && (dateFormat.parse(value.display_date) > low));
+    };
+    recordings = satchmo_data.filter(isInInterval);
+    return recordings.length;
+};
+
+var yScale = d3.scale.linear()
+                    .range([5*height/6, height/2])
+                    .domain([0, d3.max(satchmo_data, function(d) { return d.density; })]);
+                    // .domain([0, 37]);
+
+var lineFunction = d3.svg.line()
+                        .x(function (d) { return xScale(d); })
+                        .y(function (d) { return yScale(yValue(d)); })
+                        .interpolate('basis');
 
 // var xScale = d3.scale.ordinal()
 //                     .rangeBands([0, width], 0.52, 0.05)
@@ -229,62 +290,143 @@ var svg = d3.select("#satchmo").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
+    .attr('class', 'main')
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var plotArea = svg.append('g')
+    .attr('clip-path', 'url(#plotAreaClip)')
+    .call(zoom);
+
+plotArea.append('clipPath')
+    .attr('id', 'plotAreaClip')
+    .append('rect')
+    .attr('width', width)
+    .attr('height',height);
+
+var rect = plotArea.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .style("fill", "none")
+    .style("pointer-events", "all");
+
+var dates = d3.time.day.range(new Date(1900,1,1), new Date(1971,7,8), 180);
+
 // Add sessions
-var sessions = svg.selectAll('circle').data(satchmo_data).enter()
+var sessions = plotArea.selectAll('circle').data(satchmo_data).enter()
         .append('circle')
         .attr('class', 'session')
-        .attr('r', '5px')
-        .attr('cx', function(d) { return xScale(dateFormat.parse(d.display_date)); })
-        .attr('cy', 2*height/3)
-        .attr('fill', function(d) { return cScale(d.location); })
+        .attr('r', 5)
+        .attr('cx', function (d) { return xScale(dateFormat.parse(d.display_date)); })
+        .attr('cy', height)
+        .attr('fill', function (d) { return cScale(d.location_group); })
         .attr('fill-opacity', 0.3);
+
+// Add line
+// var lineGraph = svg.append('path')
+//                     .attr('d', lineFunction(dates))
+//                     .attr('stroke', 'blue')
+//                     .attr('stroke-width', 1)
+//                     .attr('fill', 'none');
 
 
 // Interactivity
-var containerWidth = $('.post').width();
-var tooltip = d3.select('#satchmo-container .tooltip');
+
+var source   = $("#session-template").html();
+var sessionTemplate = Handlebars.compile(source);
+var sessionInfo = d3.select('#session-info');
+
 sessions.on('mouseover', function (d) {
-    tooltip.style('opacity', 1)
-            .style('left', ($('#satchmo-container').position().left + margin.left + xScale(dateFormat.parse(d.display_date)))%containerWidth + 'px')
-            .style('top', margin.top + $('#satchmo-container').position().top + 2*height/3 + 50 + 'px');
-    tooltip.select('.date-and-location')
-            .html(d.display_date + ' in ' + d.location);
+    sessionInfo.html(sessionTemplate(d))
+                .style('left', (margin.left + xScale(dateFormat.parse(d.display_date))) + 'px')
+                .style('top', margin.top + height/4 + 50 + 'px');
 });
 
-// var records = g.selectAll('circle')
-//     .data(function(d) { return d.values; })
-//     .enter()
-//     .append('circle')
-//     .attr('class', 'record')
-//     .attr('r', xScale.rangeBand())
-//     .attr('cy', function(d, i) { return yScale(centered(i)); })
-//     .style('fill', function(d) { return 'url(#' + d.title.replace(/\s+|\(|\)|\'/g, '-') + ')'; })
-//     .style('stroke', function(d) { return cScale(d.recording_locations); });
+// Events
 
 var source   = $("#event-template").html();
-var template = Handlebars.compile(source);
+var eventTemplate = Handlebars.compile(source);
 
-var context = {
+var importantEvents = [{
     title: 'Birth',
-    body: "Armstrong was born into a very poor family in New Orleans, Louisiana, the grandson of slaves. He spent his youth in poverty, in a rough neighborhood, known as “the Battlefield”, which was part of the Storyville legal prostitution district."
-};
+    body: "Armstrong was born into a very poor family in New Orleans, Louisiana, the grandson of slaves. He spent his youth in poverty, in a rough neighborhood, known as “the Battlefield”, which was part of the Storyville legal prostitution district.",
+    date: '04.08.1901'
+}];
 
-var eventHtml = template(context);
 
-d3.select('#satchmo-container').append('div')
-    .attr('class', 'birth')
-    .style('left', $('#satchmo-container').position().left + 60 + 'px')
-    .style('top', $('#satchmo-container').position().top + 80 + 'px')
-    .html("<h3>" + context.title + "</h3><p>" + context.body + "</p>");
+// Plot Events
+
+var plotEvents = d3.select('#satchmo-container .plot-clip').selectAll('.important-event')
+        .data(importantEvents)
+        .enter()
+        .append('div')
+        .attr('class', 'important-event')
+        // .style('clip-path', 'url(#plotAreaClip)')
+        .style('left', function (d) { return (margin.left + xScale(dateFormat.parse(d.date)) + 'px'); })
+        .style('top', 80 + 'px')
+        .html(function (d) { return eventTemplate(d); });
+
+plotArea.selectAll('line')
+    .data(importantEvents)
+    .enter()
+    .append('line')
+    .style("stroke-dasharray", "5,2")
+    .style('stroke', '#aaaaaa')
+    .attr('x1', function (d) { return xScale(dateFormat.parse(d.date)); })
+    .attr('x2', function (d) { return xScale(dateFormat.parse(d.date)); })
+    .attr('y1', 180)
+    .attr('y2', height - 25);
 
 // Add axis
+
 svg.append('g')
     .attr('class', 'x axis')
     .attr('transform', function (d) { return 'translate(0, ' + height + ')'; })
     .call(xAxis);
 
+// Initial transition
+
+n = satchmo_data.length;
+duration = 1000;
+
+containerPosition = $('#satchmo-container').position();
+containerHeight = $('#satchmo-container').height();
+windowHeight = $(window).height();
+notFired = true;
+
+$(window).scroll(function () {
+    if (notFired) {
+        if ((windowHeight + $(this).scrollTop()) >= (containerPosition.top + containerHeight)) {
+            notFired = false;
+            setTimeout(transitionSessions, 1);
+        }
+    }
+});
+function transitionSessions() {
+sessions.transition()
+        .delay(function(d, i) { return 1000 + i / n * duration; })
+        .attr('r', function (d) { return rScale(d.members.length); })
+        .attr('cy', function (d) { return yScale(d.density); });
+}
+
+// Zoom functions
+
+function zoomed() {
+    if (xScale.domain()[0] < minDate) {
+        var x = zoom.translate()[0] - xScale(minDate) + xScale.range()[0];
+        zoom.translate([x, 0]);
+    } else if (xScale.domain()[1] > maxDate) {
+        var x = zoom.translate()[0] - xScale(maxDate) + xScale.range()[1];
+        zoom.translate([x, 0]);
+    }
+    redrawChart();
+}
+
+function redrawChart() {
+    svg.select('.x.axis').call(xAxis);
+    sessions.attr('cx', function (d) { return xScale(dateFormat.parse(d.display_date)); });
+    plotEvents.style('left', function (d) { return (margin.left + xScale(dateFormat.parse(d.date)) + 'px'); })
+}
+// });
 </script>
 
 
