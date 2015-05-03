@@ -201,9 +201,16 @@
 </script>
 
 <script async="" type="text/javascript">
+
+// d3.selection.prototype.moveToFront = function() {
+//   return this.each(function(){
+//     this.parentNode.appendChild(this);
+//   });
+// };
+
 // $(document).ready(function () {
 // Set the dimensions of the canvas / graph
-var margin = {top: 40, right: 40, bottom: 40, left: 40};
+var margin = {top: 40, right: 34, bottom: 40, left: 34};
 var width = $('.post').width() - margin.left - margin.right;
 var height = 600 - margin.top - margin.bottom;
 
@@ -257,7 +264,7 @@ var yValue = function(d) {
 };
 
 var yScale = d3.scale.linear()
-                    .range([5*height/6, height/2])
+                    .range([height - 10, height/2])
                     .domain([0, d3.max(satchmo_data, function(d) { return d.density; })]);
                     // .domain([0, 37]);
 
@@ -303,11 +310,6 @@ plotArea.append('clipPath')
     .attr('width', width)
     .attr('height',height);
 
-var rect = plotArea.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .style("fill", "none")
-    .style("pointer-events", "all");
 
 var dates = d3.time.day.range(new Date(1900,1,1), new Date(1971,7,8), 180);
 
@@ -317,9 +319,15 @@ var sessions = plotArea.selectAll('circle').data(satchmo_data).enter()
         .attr('class', 'session')
         .attr('r', 5)
         .attr('cx', function (d) { return xScale(dateFormat.parse(d.display_date)); })
-        .attr('cy', height)
-        .attr('fill', function (d) { return cScale(d.location_group); })
+        .attr('cy', 3*height/4)
+        .attr('fill', 'gray')
         .attr('fill-opacity', 0.3);
+
+var rect = plotArea.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .style("fill", "none")
+    .style("pointer-events", "all");
 
 // Add line
 // var lineGraph = svg.append('path')
@@ -329,17 +337,6 @@ var sessions = plotArea.selectAll('circle').data(satchmo_data).enter()
 //                     .attr('fill', 'none');
 
 
-// Interactivity
-
-var source   = $("#session-template").html();
-var sessionTemplate = Handlebars.compile(source);
-var sessionInfo = d3.select('#session-info');
-
-sessions.on('mouseover', function (d) {
-    sessionInfo.html(sessionTemplate(d))
-                .style('left', (margin.left + xScale(dateFormat.parse(d.display_date))) + 'px')
-                .style('top', margin.top + height/4 + 50 + 'px');
-});
 
 // Events
 
@@ -347,10 +344,17 @@ var source   = $("#event-template").html();
 var eventTemplate = Handlebars.compile(source);
 
 var importantEvents = [{
-    title: 'Birth',
+    title: '04 Aug 1901',
     body: "Armstrong was born into a very poor family in New Orleans, Louisiana, the grandson of slaves. He spent his youth in poverty, in a rough neighborhood, known as “the Battlefield”, which was part of the Storyville legal prostitution district.",
     date: '04.08.1901'
-}];
+},
+{
+    title: 'Hello, Dolly!',
+    body: 'Louis Armstrong records a song that would soon throw The Beatles of the first place on the charts!',
+    date: '03.12.1963'
+}
+];
+var importantEvents =[];
 
 
 // Plot Events
@@ -361,11 +365,11 @@ var plotEvents = d3.select('#satchmo-container .plot-clip').selectAll('.importan
         .append('div')
         .attr('class', 'important-event')
         // .style('clip-path', 'url(#plotAreaClip)')
-        .style('left', function (d) { return (margin.left + xScale(dateFormat.parse(d.date)) + 'px'); })
+        .style('left', function (d) { return xScale(dateFormat.parse(d.date)) + 'px'; })
         .style('top', 80 + 'px')
         .html(function (d) { return eventTemplate(d); });
 
-plotArea.selectAll('line')
+var eventLines = plotArea.selectAll('line')
     .data(importantEvents)
     .enter()
     .append('line')
@@ -373,8 +377,69 @@ plotArea.selectAll('line')
     .style('stroke', '#aaaaaa')
     .attr('x1', function (d) { return xScale(dateFormat.parse(d.date)); })
     .attr('x2', function (d) { return xScale(dateFormat.parse(d.date)); })
-    .attr('y1', 180)
+    .attr('y1', 220)
     .attr('y2', height - 25);
+
+
+// Interactivity
+
+var source   = $("#session-template").html();
+var sessionTemplate = Handlebars.compile(source);
+var sessionInfo = d3.select('#session-info');
+
+bisectDate = d3.bisector(function(d) { return dateFormat.parse(d.display_date); }).left
+
+rect.on("mouseover", mouseover)
+      .on("mouseout", mouseout)
+      .on("mousemove", mousemove);
+
+function mouseover () {
+    sessions.attr('fill-opacity', 0.07);
+    sessionInfo.style('visibility', 'visible');
+    plotEvents.style('opacity', 0.1);
+    eventLines.attr('opacity', 0.1);
+}
+function mouseout () {
+    sessions.attr('fill-opacity', 0.3)
+            .attr('stroke', 'none');
+
+    sessionInfo.style('visibility', 'hidden');
+    plotEvents.style('opacity', 1);
+    eventLines.attr('opacity', 1);
+}
+
+function mousemove () {
+    var x0 = xScale.invert(d3.mouse(this)[0]),
+        i = bisectDate(satchmo_data, x0, 1),
+        d0 = satchmo_data[i - 1],
+        d1 = satchmo_data[i],
+        da = x0 - dateFormat.parse(d0.display_date) > dateFormat.parse(d1.display_date) - x0 ? d1 : d0;
+
+    sessions.filter(function (d) { return da == d; })
+            .attr('fill-opacity', 1)
+            .attr('stroke', 'black')
+            .attr('stroke-dasharray', 'none')
+            .attr('stroke-opacity', 1)
+            .attr('stroke-width', 1)
+
+    sessionInfo.html(sessionTemplate(da))
+                .style('left', function (d) {
+                    sessionInfoWidth = $(this).width();
+                    xPosition = xScale(dateFormat.parse(da.display_date));
+                    return xPosition  + sessionInfoWidth > width + margin.left ? (80 + xPosition - sessionInfoWidth + 'px') : (xPosition + 'px');
+                })
+                .style('top', margin.top  + 'px');
+
+
+    sessions.filter(function (d) { return da != d; })
+            .attr('fill-opacity', 0.07)
+            .attr('stroke', function (d) { return cScale(d.location_group); })
+            .attr('stroke-dasharray', '3,2')
+            .attr('stroke-opacity', 0.5)
+            .attr('stroke-width', 0.5);
+
+}
+
 
 // Add axis
 
@@ -386,7 +451,7 @@ svg.append('g')
 // Initial transition
 
 n = satchmo_data.length;
-duration = 1000;
+duration = 1500;
 
 containerPosition = $('#satchmo-container').position();
 containerHeight = $('#satchmo-container').height();
@@ -402,9 +467,13 @@ $(window).scroll(function () {
     }
 });
 function transitionSessions() {
-sessions.transition()
-        .delay(function(d, i) { return 1000 + i / n * duration; })
+    sessions.transition()
+        .delay(function(d, i) { return 50 + i / n * duration; })
+        // .attr('fill-opacity', 0.3)
+        // .transition()
+        // .delay(function(d, i) { return duration + i / n * duration / 3; })
         .attr('r', function (d) { return rScale(d.members.length); })
+        .attr('fill', function (d) { return cScale(d.location_group); })
         .attr('cy', function (d) { return yScale(d.density); });
 }
 
@@ -424,7 +493,9 @@ function zoomed() {
 function redrawChart() {
     svg.select('.x.axis').call(xAxis);
     sessions.attr('cx', function (d) { return xScale(dateFormat.parse(d.display_date)); });
-    plotEvents.style('left', function (d) { return (margin.left + xScale(dateFormat.parse(d.date)) + 'px'); })
+    plotEvents.style('left', function (d) { return xScale(dateFormat.parse(d.date)) + 'px'; });
+    eventLines.attr('x1', function (d) { return xScale(dateFormat.parse(d.date)); })
+                .attr('x2', function (d) { return xScale(dateFormat.parse(d.date)); });
 }
 // });
 </script>
