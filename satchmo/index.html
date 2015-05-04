@@ -210,7 +210,7 @@
 
 // $(document).ready(function () {
 // Set the dimensions of the canvas / graph
-var margin = {top: 40, right: 34, bottom: 40, left: 34};
+var margin = {top: 40, right: 40, bottom: 40, left: 50};
 var width = $('.post').width() - margin.left - margin.right;
 var height = 600 - margin.top - margin.bottom;
 
@@ -218,8 +218,6 @@ $('.plot-clip').width(width)
                 .height(height)
                 .css({'left': margin.left, 'top': margin.top});
 
-
-// Other variables
 
 // Date formater
 var dateFormat = d3.time.format('%0d.%0m.%Y');
@@ -264,8 +262,8 @@ var yValue = function(d) {
 };
 
 var yScale = d3.scale.linear()
-                    .range([height - 10, height/2])
-                    .domain([0, d3.max(satchmo_data, function(d) { return d.density; })]);
+                    .range([height, height/2])
+                    .domain([-2, d3.max(satchmo_data, function(d) { return d.density; })]);
                     // .domain([0, 37]);
 
 var lineFunction = d3.svg.line()
@@ -291,6 +289,8 @@ var lineFunction = d3.svg.line()
 
 // Set xAxis
 var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
+var yAxis = d3.svg.axis().scale(yScale).orient('left');
+
 
 // Add svg canvas
 var svg = d3.select("#satchmo").append("svg")
@@ -398,6 +398,7 @@ function mouseover () {
     sessionInfo.style('visibility', 'visible');
     plotEvents.style('opacity', 0.1);
     eventLines.attr('opacity', 0.1);
+    d3.selectAll('.legend').attr('opacity', 0.1);
 }
 function mouseout () {
     sessions.attr('fill-opacity', 0.3)
@@ -406,6 +407,7 @@ function mouseout () {
     sessionInfo.style('visibility', 'hidden');
     plotEvents.style('opacity', 1);
     eventLines.attr('opacity', 1);
+    d3.selectAll('.legend').attr('opacity', 1);
 }
 
 function mousemove () {
@@ -440,6 +442,69 @@ function mousemove () {
 
 }
 
+// Add legend
+
+var legend = svg.append('g')
+    .attr('class', 'legend')
+    .attr('transform', function (d) { return 'translate(60, ' + (height - 60) + ')'; })
+
+legend.append('text')
+    .attr('fill', 'black')
+    .attr('text-anchor', 'middle')
+    .attr('x', 0)
+    .attr('y', -rScale.range()[1] - 10)
+    .text('Band size');
+
+legend.append('circle')
+    .attr('r', rScale.range()[1])
+    .attr('cx', 0)
+    .attr('cy', 0)
+    .attr('fill', 'none')
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '2,2')
+    .attr('stroke', '#555');
+
+legend.append('circle')
+    .attr('r', rScale.range()[0])
+    .attr('cx', 0)
+    .attr('cy', rScale.range()[1] - rScale.range()[0])
+    .attr('fill', 'none')
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', '2,2')
+    .attr('stroke', '#555');
+
+legend.append('text')
+    .text(rScale.domain()[1])
+    .attr('fill', '#555')
+    .attr('font-size', 12)
+    .attr('text-anchor', 'left')
+    .attr('dy', 4)
+    .attr('x', rScale.range()[1] + 13);
+
+legend.append('line')
+    .attr('stroke-width', 1)
+    .attr('stroke', '#555')
+    .attr('x1', rScale.range()[1] + 2)
+    .attr('x2', rScale.range()[1] + 10)
+    .attr('y1', 0)
+    .attr('y2', 0);
+
+legend.append('text')
+    .text('2')
+    .attr('fill', '#555')
+    .attr('font-size', 12)
+    .attr('text-anchor', 'left')
+    .attr('dy', 4)
+    .attr('x', rScale.range()[1] + 13)
+    .attr('y', rScale.range()[1] - rScale.range()[0]);
+
+legend.append('line')
+    .attr('stroke-width', 1)
+    .attr('stroke', '#555')
+    .attr('x1', rScale.range()[0] + 2)
+    .attr('x2', rScale.range()[1] + 10)
+    .attr('y1', rScale.range()[1] - rScale.range()[0])
+    .attr('y2', rScale.range()[1] - rScale.range()[0]);
 
 // Add axis
 
@@ -447,6 +512,25 @@ svg.append('g')
     .attr('class', 'x axis')
     .attr('transform', function (d) { return 'translate(0, ' + height + ')'; })
     .call(xAxis);
+
+svg.append('g')
+    .attr('transform', function (d) { return 'translate(0, 0)'; })
+    .attr('class', 'y axis')
+    .call(yAxis);
+
+// now add titles to the axes
+svg.append("text")
+    .attr('class', 'axis-label')
+    .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+    .attr("transform", "translate(-"+ (margin.left - 7)+","+(2*height/3)+")rotate(90)")  // text is drawn off the screen top left, move down and out and rotate
+    .text("Number of recordings in a year");
+
+svg.append("text")
+    .attr('class', 'axis-label')
+    .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+    .attr("transform", "translate("+ (width/2) +","+(height+margin.bottom)+")")  // centre below axis
+    .text("Date");
+
 
 // Initial transition
 
