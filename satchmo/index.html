@@ -162,29 +162,26 @@
 </div>
 <div class="row clear song-selection hide-mobile">
     <form action="#">
-        <label for="song-selection">Filter by songs: </label>
-        <select id="song-selection" multiple="multiple" class="col-6">
+        <label for="song-selection" class="col col-6 text-right">Show sessions with these songs: </label>
+        <select id="song-selection" multiple="multiple" class="col col-4">
         </select>
-    </form>
-</div>
+
 <div class="row clear song-selection hide-mobile">
-    <form action="#">
-        <label for="lineup-selection">Filter by band members: </label>
-        <select id="lineup-selection" multiple="multiple" class="col-6">
+        <label for="lineup-selection" class="col col-6 text-right">and these band members: </label>
+        <select id="lineup-selection" multiple="multiple" class="col col-4">
         </select>
-    </form>
+    
 </div>
 
-<p><em class="none show-mobile">Unfortunately this interactive visualization is not supported on mobile devices. Come check it out on your tablet or computer.</em></p>
+<em class="none show-mobile">Unfortunately this interactive visualization is not supported on mobile devices. Come check it out on your tablet or computer.</em>
 
-<p><em class="ie-warning">This visualization might not work properly under your browser. Consider upgrading or getting a different browser.</em></p>
+<em class="ie-warning">This visualization might not work properly under your browser. Consider upgrading or getting a different browser.</em>
 
-<p><span class="font-small">A few technical details, for those interested. I used <a href="http://d3js.org/">d3</a> library for the actual visualization. To get the data from the website I mentioned earlier, I used <a href="http://import.io">import.io</a> (which was a joy to use, if I may add). And finally for parsing and cleaning up, Python was the way to go.</span></p>
+<span class="font-small">A few technical details, for those interested. I used [d3](http://d3js.org/) library for the actual visualization. To get the data from the website I mentioned earlier, I used [import.io](http://import.io) (which was a joy to use, if I may add). And finally for parsing and cleaning up, Python was the way to go.</span>
+
 
 <script type="text/javascript" src="/js/d3.min.js"></script>
-
 <script type="text/javascript" src="/js/louis_armstrong.js"></script>
-
 <script type="text/javascript" src="/js/handlebars-v3.0.1.js"></script>
 
 <script id="event-template" type="text/x-handlebars-template">
@@ -197,7 +194,6 @@
   </div>
 
 </script>
-
 <script id="session-template" type="text/x-handlebars-template">
 
 <div class="row">
@@ -233,10 +229,12 @@
 
 $(document).ready(function() {
   $("#song-selection").select2({
-        data: satchmo_songs
+        data: satchmo_songs,
+        placeholder: 'Start typing a song'
   });
   $("#lineup-selection").select2({
-        data: members
+        data: members,
+        placeholder: "Start typing a musician's name"
   });
 });
 
@@ -288,6 +286,10 @@ var cScale = d3.scale.ordinal()
 var rScale = d3.scale.linear()
             .range([5, 18])
             .domain(d3.extent(satchmo_data, function (d) { return d.members.length; }));
+
+var mScale = d3.scale.quantize()
+                .range([0, 0.25, 0.75, 1])
+                .domain([0, width]);
 
 // Zoom
 
@@ -481,7 +483,7 @@ function selectSession () {
                 .style('left', function (d) {
                     sessionInfoWidth = $(this).width();
                     xPosition = xScale(dateFormat.parse(session.display_date));
-                    return xPosition  + sessionInfoWidth > width + margin.left ? (80 + xPosition - sessionInfoWidth + 'px') : (xPosition + 'px');
+                    return xPosition - mScale(xPosition - margin.left) * sessionInfoWidth + 'px';
                 })
                 .style('top', margin.top  + 'px');
 
@@ -543,7 +545,7 @@ function mousemove () {
                 .style('left', function (d) {
                     sessionInfoWidth = $(this).width();
                     xPosition = xScale(dateFormat.parse(da.display_date));
-                    return xPosition  + sessionInfoWidth > width + margin.left ? (80 + xPosition - sessionInfoWidth + 'px') : (xPosition + 'px');
+                    return xPosition - mScale(xPosition - margin.left) * sessionInfoWidth + 'px';
                 })
                 .style('top', 20  + 'px');
 
@@ -659,7 +661,7 @@ notFired = true;
 
 $(window).scroll(function () {
     if (notFired) {
-        if ((windowHeight + $(this).scrollTop()) >= (containerPosition.top + containerHeight)) {
+        if ((windowHeight + $(this).scrollTop()) >= (containerPosition.top + containerHeight - 100)) {
             notFired = false;
             setTimeout(transitionSessions, 1);
         }
@@ -702,7 +704,7 @@ function redrawChart() {
 }
 
 </script>
-
+</form></div>
 
 <!--   <div class="invitation text-center">Did you like this post? Subscribe to my blog and be notified whenever I post something new!
     <br/>
