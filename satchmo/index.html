@@ -210,7 +210,7 @@
             </div>
         </div>
     </div>
-    <div class="col col-5">
+    <div class="col col-5 text-left">
         <div class="side-section inline-block text-left">
         <ul class="list-unstyled">
           {{#each song_list}}
@@ -226,7 +226,12 @@
 </script>
 
 <script async="" type="text/javascript">
+// Prepare the data
+satchmo_songs = satchmo_data['songs'];
+members = satchmo_data['members'];
+satchmo_data = satchmo_data['sessions'];
 
+// Filters
 $(document).ready(function() {
   $("#song-selection").select2({
         data: satchmo_songs,
