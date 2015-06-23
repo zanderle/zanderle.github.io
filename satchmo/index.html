@@ -183,6 +183,7 @@
 <script type="text/javascript" src="/js/d3.min.js"></script>
 <script type="text/javascript" src="/js/louis_armstrong.js"></script>
 <script type="text/javascript" src="/js/handlebars-v3.0.1.js"></script>
+<script type="text/javascript" src="/js/underscore.min.js"></script>
 
 <script id="event-template" type="text/x-handlebars-template">
 
@@ -213,7 +214,7 @@
         <ul class="list-unstyled">
           {{#each song_list}}
             <li>
-              {{this}}  
+              <b>{{this}}</b>
             </li>
           {{/each}}
         </ul>
@@ -492,18 +493,22 @@ var selected = {};
 function setSelected (selection, song_ids, member_ids) {
     var selectedSongs = {};
     var selectedMembers = {};
-    if (song_ids) {
+    if (song_ids !== null & typeof song_ids !== 'undefined') {
         selection.each(function (d) { return (d.song_id_list.some(function (el) { return song_ids.indexOf((el).toString()) > -1; })) ? (selectedSongs[d.id] = true) : (delete selectedSongs[d.id]); });
     } 
-    if (member_ids) {
+    if (member_ids !== null & typeof member_ids !== 'undefined') {
         selection.each(function (d) { return (d.member_id_list.some(function (el) { return member_ids.indexOf((el).toString()) > -1; })) ? (selectedMembers[d.id] = true) : (delete selectedMembers[d.id]); });        
     }
-    if (typeof song_ids !== 'undefined' | typeof member_ids !== 'undefined') {
-        selected = $.merge(selectedSongs, selectedMembers);
-        delete selected['length']; // No idea why this is needed, but it doesn't work otherwise
-        if (sizeOf(selected) == 0) {
+    if ((song_ids !== null & typeof song_ids !== 'undefined') | (member_ids !== null & typeof member_ids !== 'undefined')) {
+        console.log(selectedSongs);
+        console.log(selectedMembers);
+        if (sizeOf(selectedMembers) == 0) {
+            selected = selectedSongs;
+        } else if (sizeOf(selectedSongs) == 0) {
             selected = selectedMembers;
-        } 
+        } else {
+            selected = _.pick(selectedSongs, _.keys(selectedMembers));
+        }
     } else {
         selected = {};
     }
@@ -518,8 +523,8 @@ function highlightSelected (selection, lowEnd, highEnd) {
 function selectSongs () {
     var song_ids = $('#song-selection').val();
     var member_ids = $('#lineup-selection').val();
-    sessions.call(setSelected, song_ids, member_ids)
-    if (typeof song_ids !== 'undefined' | typeof member_ids !== 'undefined') {
+    sessions.call(setSelected, song_ids, member_ids);
+    if ((song_ids !== null & typeof song_ids !== 'undefined') | (member_ids !== null & typeof member_ids !== 'undefined')) {
         sessions.call(highlightSelected, lowestOpacity, higherOpacity);
     } else {
         sessions.attr('fill-opacity', mediumOpacity)
