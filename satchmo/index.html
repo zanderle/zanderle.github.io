@@ -215,7 +215,9 @@ The visualization is also interactive. You can zoom in closer to get a better lo
         <h4>{{location}}</h4>
         <div class="first-section">
             <div class="inline-block no-split">
-            {{lineup}}
+            {{#each members}}
+                {{this}}{{#unless @last}}, {{/unless}} 
+            {{/each}}
             </div>
             <div class="no-split inline-block">
             {{comments}}
