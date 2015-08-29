@@ -173,7 +173,7 @@ The visualization is also interactive. You can zoom in closer to get a better lo
     </div>
     <div id="session-info"></div>
 </div>
-<div class="row clear song-selection hide-mobile">
+<div class="row clear song-selection no-mobile">
     <form action="#">
         <label for="song-selection" class="col col-3 inline-block text-right">Show sessions that have</label>
         <select id="song-selection" multiple="multiple" class="inline-block col col-3">
@@ -246,14 +246,16 @@ satchmo_data = satchmo_data['sessions'];
 
 // Filters
 $(document).ready(function() {
-  $("#song-selection").select2({
-        data: satchmo_songs,
-        placeholder: 'these songs'
-  });
-  $("#lineup-selection").select2({
-        data: members,
-        placeholder: "these band members"
-  });
+    if ($(window).width() > 739) {
+      $("#song-selection").select2({
+            data: satchmo_songs,
+            placeholder: 'these songs'
+      });
+      $("#lineup-selection").select2({
+            data: members,
+            placeholder: "these band members"
+      });
+    }
 });
 
 // Helpers
@@ -267,6 +269,13 @@ function sizeOf(obj) {
 
     return count;
 }
+
+if ($(window).width() > 739) {
+    doTheDance();
+}
+
+function doTheDance () {
+
 
 // Set the dimensions of the canvas / graph
 var margin = {top: 20, right: 40, bottom: 100, left: 50};
@@ -906,6 +915,7 @@ function redrawChart() {
                 .style('visibility', function (d, i) { return ($('#event-' + i).css('visibility') == 'hidden') ? 'hidden' : 'visible'; });
 }
 
+}
 </script>
 
 
