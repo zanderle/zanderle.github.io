@@ -563,7 +563,11 @@ function setSelected (selection, song_ids, member_ids) {
     }
 
     if (selectedLocations.length > 0) {
-        selection.each(function (d) { return (selectedLocations.indexOf(d.location_group) > -1) ? (selected[d.id] = true) : (delete selected[d.id]); });
+        if (sizeOf(selected) > 0) {
+            selection.each(function (d) { if (selectedLocations.indexOf(d.location_group) == -1) { (delete selected[d.id]); } });
+        } else {
+            selection.each(function (d) { return (selectedLocations.indexOf(d.location_group) > -1) ? (selected[d.id] = true) : (delete selected[d.id]); });
+        }
     }
 
     // Have mouse hover work only on selected sessions
