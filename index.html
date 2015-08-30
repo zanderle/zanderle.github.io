@@ -843,7 +843,7 @@ notFired = true;
 
 $(window).scroll(function () {
     if (notFired) {
-        if ((windowHeight + $(this).scrollTop()) >= (containerPosition.top + containerHeight - 100)) {
+        if ((windowHeight + $(this).scrollTop()) >= (containerPosition.top + containerHeight)) {
             notFired = false;
             plotArea.call(zoom);
             setTimeout(transitionSessions, 1);
