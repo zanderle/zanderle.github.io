@@ -281,6 +281,10 @@ function doTheDance () {
 var margin = {top: 20, right: 40, bottom: 100, left: 50};
 var width = $('.post').width() - margin.left - margin.right;
 var height = $(window).height() - margin.top - margin.bottom - 80;
+if (height > 800) {
+    // Limit the height of the viz to 800 px
+    height = 800;
+}
 
 $('.plot-clip').width(width + 180)
                 .height(height)
